@@ -18,6 +18,8 @@ MJ_APIKEY_PRIVATE = os.getenv('MJ_APIKEY_PRIVATE')
 MJ_SENDER_EMAIL = os.getenv('MJ_SENDER_EMAIL')
 MJ_SENDER_NAME = os.getenv('MJ_SENDER_NAME', 'Transfer99 Booking')
 
+CLIENT_URL = os.getenv('CLIENT_URL', 'http://localhost:8000')
+
 if not all([MJ_APIKEY_PUBLIC, MJ_APIKEY_PRIVATE, MJ_SENDER_EMAIL]):
     raise EnvironmentError("Missing one or more Mailjet credentials or email addresses in environment variables.")
 
@@ -29,7 +31,7 @@ app = FastAPI(title="Transfer99 Booking API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],            # or your front-end origin
+    allow_origins=[CLIENT_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
